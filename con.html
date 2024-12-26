@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vCard - Personal Portfolio</title>
+
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons.js"></script>
+</head>
+
+<body>
+  <main>
+    <article class="about active" data-page="about">
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="html.html">
+              <button class="navbar-link" data-nav-link>About</button>
+            </a>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>Contact</button>
+          </li>
+        </ul>
+      </nav>
+      <section class="about-text">
+        <div class="contact" data-page="contact">
+          <header>
+            <h2 class="h2 article-title">Contact</h2>
+          </header>
+        </div>
+      </section>
+
+      <section class="contact-form">
+        <h3 class="h3 form-title">Contact Form</h3>
+        <form class="form" id="contact-form">
+          <div class="input-wrapper">
+            <input type="text" name="firstname" class="form-input" placeholder="First Name" required>
+            <input type="text" name="lastname" class="form-input" placeholder="Last Name" required>
+          </div>
+          <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+          <button class="form-btn" type="submit">
+            <ion-icon name="paper-plane"></ion-icon>
+            <span>Send Message</span>
+          </button>
+        </form>
+
+        <div id="response-message" style="margin-top: 20px; font-size: 1.2em;"></div>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    const form = document.getElementById('contact-form');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault(); 
+
+      const firstName = form.querySelector('input[name="firstname"]').value;
+      const lastName = form.querySelector('input[name="lastname"]').value;
+      const message = form.querySelector('textarea[name="message"]').value;
+
+      const apiUrl = `https://api.telegram.org/bot2101899532:AAGQ4MjaBjYhu--NWwDpUeFlhZnRriPDcFA/sendMessage?chat_id=1339653142&text=First Name: ${firstName}\nLast Name: ${lastName}\nMessage: ${message}`;  
+      const response = await fetch(apiUrl);
+      document.getElementById('response-message').innerHTML = "<span style='color: #ffd500;'>Message sent successfully!</span>";})
+  </script>
+</body>
+
+</html>
